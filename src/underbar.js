@@ -101,6 +101,29 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    var result = [];
+    if (isSorted === true) {
+      var dupes = {};
+      _.each(array, function(arguement){
+        if (typeof dupes[arguement] !== 'number'){
+          dupes[arguement] = 0;
+        } else {
+          dupes[arguement]++;
+        }
+      });
+      for (var k = 0; k < Object.entries(dupes).length; k++) {
+      if (Object.entries(dupes)[k][1] === 0) {
+        result.push(parseInt(Object.entries(dupes)[k]));
+    }
+  }
+    } else {
+      _.each(array, function(arguement){
+        if (!result.includes(arguement)){
+          result.push(arguement);
+        }
+      });
+    }
+    return result;
   };
 
 
