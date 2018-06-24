@@ -178,6 +178,19 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    var results = accumulator;
+    if (results === undefined) {
+      results = collection[0];
+      var neoStart = collection.slice(1);
+      console.log('Start is '+results+' neoStart is '+neoStart);
+      _.each(neoStart, function (argument) {
+        results = iterator(results, argument);
+      });
+    } else { _.each(collection, function (argument) {
+      results = iterator(results, argument);
+    });
+    }
+    return results;
   };
 
   // Determine if the array or object contains a given value (using `===`).
