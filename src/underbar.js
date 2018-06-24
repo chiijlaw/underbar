@@ -104,11 +104,11 @@
     var result = [];
     if (isSorted === true) {
       var dupes = {};
-      _.each(array, function(arguement){
-        if (typeof dupes[arguement] !== 'number'){
-          dupes[arguement] = 0;
+      _.each(array, function(argument){
+        if (typeof dupes[argument] !== 'number'){
+          dupes[argument] = 0;
         } else {
-          dupes[arguement]++;
+          dupes[argument]++;
         }
       });
       for (var k = 0; k < Object.entries(dupes).length; k++) {
@@ -117,9 +117,9 @@
     }
   }
     } else {
-      _.each(array, function(arguement){
-        if (!result.includes(arguement)){
-          result.push(arguement);
+      _.each(array, function(argument){
+        if (!result.includes(argument)){
+          result.push(argument);
         }
       });
     }
@@ -132,6 +132,11 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    var results = [];
+    _.each(collection, function (argument) {
+      results.push(iterator(argument));
+    });
+    return results;
   };
 
   /*
