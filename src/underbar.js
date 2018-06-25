@@ -78,9 +78,9 @@
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
     var result = [];
-    _.each(collection,function(argument) {
-      if (test(argument)) {
-        result.push(argument);
+    _.each(collection,function(ele) {
+      if (test(ele)) {
+        result.push(ele);
       }
     });
     return result;
@@ -91,9 +91,9 @@
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
    var result = [];
-    _.each(collection,function(argument) {
-      if (!test(argument)) {
-        result.push(argument);
+    _.each(collection,function(ele) {
+      if (!test(ele)) {
+        result.push(ele);
       }
     });
     return result;
@@ -101,29 +101,13 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
-    var result = [];
-    if (isSorted === true) {
-      var dupes = {};
-      _.each(array, function(argument){
-        if (typeof dupes[argument] !== 'number'){
-          dupes[argument] = 0;
-        } else {
-          dupes[argument]++;
-        }
-      });
-      for (var k = 0; k < Object.entries(dupes).length; k++) {
-      if (Object.entries(dupes)[k][1] === 0) {
-        result.push(parseInt(Object.entries(dupes)[k]));
-    }
-  }
-    } else {
-      _.each(array, function(argument){
-        if (!result.includes(argument)){
-          result.push(argument);
-        }
-      });
-    }
-    return result;
+    var results = [];
+    _.each(array,function (ele) {
+      if (_.indexOf(results, ele) === -1) {
+        results.push(ele);
+      }
+    });
+    return results;
   };
 
 
@@ -133,8 +117,8 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var results = [];
-    _.each(collection, function (argument) {
-      results.push(iterator(argument));
+    _.each(collection, function (ele) {
+      results.push(iterator(ele));
     });
     return results;
   };
@@ -183,11 +167,11 @@
       results = collection[0];
       var neoStart = collection.slice(1);
       console.log('Start is '+results+' neoStart is '+neoStart);
-      _.each(neoStart, function (argument) {
-        results = iterator(results, argument);
+      _.each(neoStart, function (ele) {
+        results = iterator(results, ele);
       });
-    } else { _.each(collection, function (argument) {
-      results = iterator(results, argument);
+    } else { _.each(collection, function (ele) {
+      results = iterator(results, ele);
     });
     }
     return results;
