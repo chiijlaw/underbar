@@ -303,6 +303,15 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var onceArgList = {};
+    return function () {
+      //var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
+      var args = JSON.stringify(arguments);
+      if( !onceArgList.hasOwnProperty(args) ){
+        onceArgList[args] = func.apply(null, arguments);
+      }
+      return onceArgList[args];
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
